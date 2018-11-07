@@ -1,4 +1,4 @@
-package server;
+package tcpip.server;
 
 import java.io.*;
 import java.net.*;
@@ -7,8 +7,9 @@ import java.util.*;
 /**
  * @author Bartosz Śledź
  */
-public class MultiThreadServer extends Thread {
+public final class Server extends Thread {
 
+    private static final int PORT = 9000;
     private static final int MAX_USERS = 10;
     private static final String CONNECT = "CONNECT";
     private static final String ONLINE = "ONLINE";
@@ -20,10 +21,9 @@ public class MultiThreadServer extends Thread {
     private final Socket socket;
     private String username;
     private boolean error = false;
-    private BufferedReader in;
     private PrintWriter out;
 
-    MultiThreadServer(final Socket socket) {
+    private Server(final Socket socket) {
         this.socket = socket;
     }
 
@@ -33,7 +33,7 @@ public class MultiThreadServer extends Thread {
     public void run() {
         try {
 
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            final BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
 
             while (true) {
@@ -117,4 +117,15 @@ public class MultiThreadServer extends Thread {
         out.println(String.format("%s:%s", ERROR, message));
     }
 
+    public static void main(String[] args) throws IOException {
+        System.out.println("Start Server.");
+        ServerSocket serverSocket = new ServerSocket(PORT);
+        try {
+            while (true) {
+                new Server(serverSocket.accept()).start();
+            }
+        } finally {
+            serverSocket.close();
+        }
+    }
 }

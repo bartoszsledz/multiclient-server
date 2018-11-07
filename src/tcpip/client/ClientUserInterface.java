@@ -1,4 +1,4 @@
-package client;
+package tcpip.client;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,25 +10,23 @@ import java.util.HashSet;
  */
 final class ClientUserInterface extends JFrame {
 
-    private JPanel contentPane;
     private JTextField sendTextArea, addressTextField, portTextField, nickTextField;
     private JTextArea messagesTextArea, usersOnlineTextArea;
     private JButton connectBtn, sendBtn;
-    private JLabel portTextLabel, addressLabel, nickLabel, connectionStatus;
-    private JSeparator separator;
+    private JLabel connectionStatus;
 
     ClientUserInterface() {
         initGuiElements();
     }
 
     /**
-     * Inicializuje elementy GUI.
+     * Inicializuje elementy UserInterface.
      */
     private void initGuiElements() {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(100, 100, 570, 450);
-        contentPane = new JPanel();
+        final JPanel contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
@@ -62,13 +60,14 @@ final class ClientUserInterface extends JFrame {
 
         sendBtn = new JButton("Send");
         sendBtn.setBounds(406, 370, 149, 39);
+        sendBtn.setEnabled(false);
         contentPane.add(sendBtn);
 
-        addressLabel = new JLabel("Address:");
+        final JLabel addressLabel = new JLabel("Address:");
         addressLabel.setBounds(406, 11, 56, 14);
         contentPane.add(addressLabel);
 
-        portTextLabel = new JLabel("Port:");
+        final JLabel portTextLabel = new JLabel("Port:");
         portTextLabel.setBounds(406, 42, 56, 14);
         contentPane.add(portTextLabel);
 
@@ -76,7 +75,7 @@ final class ClientUserInterface extends JFrame {
         connectBtn.setBounds(466, 101, 89, 23);
         contentPane.add(connectBtn);
 
-        separator = new JSeparator();
+        final JSeparator separator = new JSeparator();
         separator.setBounds(406, 131, 149, 20);
         contentPane.add(separator);
 
@@ -85,7 +84,7 @@ final class ClientUserInterface extends JFrame {
         nickTextField.setBounds(466, 70, 89, 20);
         contentPane.add(nickTextField);
 
-        nickLabel = new JLabel("Nick:");
+        final JLabel nickLabel = new JLabel("Nick:");
         nickLabel.setBounds(406, 73, 56, 14);
         contentPane.add(nickLabel);
 
@@ -185,6 +184,7 @@ final class ClientUserInterface extends JFrame {
         addressTextField.setEnabled(false);
         portTextField.setEnabled(false);
         connectBtn.setEnabled(false);
+        sendBtn.setEnabled(true);
         setConnectionStatus("OK");
     }
 

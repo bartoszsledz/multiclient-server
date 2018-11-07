@@ -1,5 +1,6 @@
-package client;
+package tcpip.client;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.*;
 import java.util.Arrays;
@@ -21,7 +22,7 @@ final class Client {
     private PrintWriter out;
     private BufferedReader in;
 
-    Client(final ClientUserInterface clientUserInterface) {
+    private Client(final ClientUserInterface clientUserInterface) {
         this.clientUserInterface = clientUserInterface;
         sendButtonListener();
         sendTextAreaListener();
@@ -98,7 +99,7 @@ final class Client {
     }
 
     /**
-     * Prepares the received message from the server for display.
+     * Prepares the received message from the tcpip.server for display.
      *
      * @param line {@link String}
      */
@@ -126,4 +127,7 @@ final class Client {
         }
     }
 
+    public static void main(final String[] args) {
+        SwingUtilities.invokeLater(() -> new Client(new ClientUserInterface()));
+    }
 }
