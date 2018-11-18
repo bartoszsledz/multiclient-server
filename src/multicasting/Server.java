@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Bartosz Śledź
+ * @deprecated
  */
 public class Server {
 

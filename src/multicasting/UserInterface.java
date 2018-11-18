@@ -5,7 +5,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 /**
  * @author Bartosz Śledź
@@ -97,7 +99,7 @@ public final class UserInterface extends JFrame {
      * @param windowAdapter {@link WindowAdapter}
      */
     public void addExitListener(final WindowAdapter windowAdapter) {
-          this.addWindowListener(windowAdapter);
+        this.addWindowListener(windowAdapter);
     }
 
     /**
@@ -162,5 +164,17 @@ public final class UserInterface extends JFrame {
         }
     }
 
+    /**
+     * Displays a window with information.
+     *
+     * @param info {@link String}
+     */
+    public void showInfo(final String info) {
+        JOptionPane.showMessageDialog(
+                this,
+                info,
+                "Info",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
 
 }
